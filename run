@@ -1,0 +1,5 @@
+#!/bin/bash
+
+python3 -m interface
+
+find . -type d -name "__pycache__" -exec rm -rf {} +
