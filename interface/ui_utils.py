@@ -35,6 +35,6 @@ def json_dump(user, password):
     try:
         with open(file_name, "w") as f:
             json.dump(tmp_json, f, indent=2)
-        os.chmod("../.user.json", 0o444)
+        os.chmod(".user.json", 0o444)
     except BaseException as e:
         show_error(e, mode="exit")  
