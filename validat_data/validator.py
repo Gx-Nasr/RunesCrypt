@@ -1,5 +1,5 @@
 import json
-
+from hash_sha_256.sha_256 import sha_256
 
 def validate_password(password):
     if len(password) < 8:
@@ -45,13 +45,21 @@ def validate_login(login):
 
     for c in login:
         if not c.isalpha():
-            if c != '_':
+            if c not in '_-':
                 return "invalid character"
             
     return None
 
 
 def validat_password_login(login: str, password: str) -> bool | str:
+    if len(login) > 12:
+        return "Login cannot exceed 12 characters"
+    if len(password) > 32:
+        return "Password cannot exceed 32 characters"
+    
+    login = sha_256(login)
+    password = sha_256(password)
+
     with open(".user.json", "r") as f:
         user_dict = json.load(f)
     if login != user_dict["login"] or password != user_dict["password"]:

@@ -2,7 +2,7 @@ import tkinter as tk
 from validat_data.validator import validat_password_login
 from interface.ui_utils import show_error
 from .ui_utils import clear_window, root
-from hash_sha_256.sha_256 import sha_256
+
 
 def login_screen():
     clear_window()
@@ -22,8 +22,8 @@ def login_screen():
     password_entry.pack(pady=10)
 
     def checker():
-        login = sha_256(username_entry.get())
-        password = sha_256(password_entry.get())
+        login = username_entry.get()
+        password = password_entry.get()
 
         try:
             result = validat_password_login(login, password)
