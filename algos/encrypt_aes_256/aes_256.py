@@ -29,29 +29,6 @@ def convert_base(number: int, base: str, is_nb=0) -> str:
     
     return result
 
-def xor_msg_pass(msg_matrix, password_matrix):
-    l_m_m = len(msg_matrix)
-    l_p_m = len(password_matrix)
-    matrix_max = max([l_m_m, l_p_m])
-    matrix_min = min([l_m_m, l_p_m])
-    matix = []
-    a = 0
-    b = 0
-    while a < matrix_max:
-        j = 0
-        tmp_list = [[], [], [], []]
-        if b < matrix_min:
-            b = 0
-
-        while j < 4:
-            k = 0
-            while k < 4:
-                xor_res = xor([msg_matrix[]])
-                tmp_list[j].append()
-                k += 1
-            j += 1
-        a += 1
-        b += 1
 
 
 def creat_matrix(msg):
