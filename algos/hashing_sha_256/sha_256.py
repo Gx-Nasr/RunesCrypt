@@ -1,5 +1,5 @@
-from hash_sha_256.sha_256_utils import convert_base, w_generater
-from hash_sha_256.operations import big_sigma1, big_sigma0, ch, maj
+from algos.hashing_sha_256.sha_256_utils import convert_base, w_generater
+from algos.hashing_sha_256.operations import big_sigma1, big_sigma0, ch, maj
 
 
 # Splits a 512-bit binary string into 32-bit blocks
@@ -65,7 +65,7 @@ def sha_256(hash_string: str) -> str:
         new_w: str = w_generater(blocks, i)
         blocks.append(new_w)
 
-    # Initial hash values
+    # Initial hash values, 256-bit
     H: list[int] = [
         int("6a09e667", 16),
         int("bb67ae85", 16),

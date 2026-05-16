@@ -1,4 +1,4 @@
-from hash_sha_256.sha_256_utils import add_0_to_32, rotate_right, shift_right, convert_base
+from algos.hashing_sha_256.sha_256_utils import add_0_to_32, rotate_right, shift_right, convert_base
 
 
 # Perform XOR operation on multiple binary strings

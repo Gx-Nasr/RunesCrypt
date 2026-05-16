@@ -1,5 +1,5 @@
 import json
-from hash_sha_256.sha_256 import sha_256
+from algos.hashing_sha_256.sha_256 import sha_256
 
 def validate_password(password):
     if len(password) < 8:

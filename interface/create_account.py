@@ -2,7 +2,7 @@ import tkinter as tk
 from .ui_utils import clear_window, root, show_error, json_dump, file_name
 from validat_data.validator import validate_password, validate_login
 from interface.login import login_screen
-from hash_sha_256.sha_256 import sha_256
+from algos.hashing_sha_256.sha_256 import sha_256
 
 
 def create_screen():

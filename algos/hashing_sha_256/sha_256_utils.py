@@ -41,7 +41,7 @@ def shift_right(block: str, k: int) -> str:
 
 # Generates a new word in the SHA-256 message schedule
 def w_generater(blocks: list[str], i: int) -> str:
-    from hash_sha_256.operations import sigma0, sigma1
+    from algos.hashing_sha_256.operations import sigma0, sigma1
 
     w_1: int = int(blocks[i-16], 2)
     w_2: int = int(sigma0(blocks[i-15]), 2)
