@@ -1,3 +1,12 @@
+def add_0_to_bn(number: str, add_0) -> str:
+    b_len: int = add_0 - len(number)
+    if b_len <= 0:
+        return number
+    zeros = "0" * b_len
+
+    return zeros + number
+
+
 def xor(binary_list: list[str]) -> str:
     result: list[str] = []
     len_s: int = len(binary_list[0])
@@ -19,6 +28,9 @@ def xor(binary_list: list[str]) -> str:
 def convert_base(number: int, base: str, is_nb=0) -> str:
     if is_nb > 0:
         number = int(number, is_nb)
+    if number == 0:
+        return '0'
+
     result: str = ""
     len_base: int = len(base)
 
@@ -30,9 +42,35 @@ def convert_base(number: int, base: str, is_nb=0) -> str:
     return result
 
 
+def xor_matrix(matrix1, matrix2):
+    matrix = []
+    max_len = len(matrix1)
+    min_len = len(matrix2)
+    a = 0
+    b = 0
+    while a < max_len:
+        if b == min_len:
+            b = 0
+        i = 0
+        tmp_list = [[], [], [], []]
+        while i < 4:
+            j = 0
+            while j < 4:
+                mx_1 = matrix1[a][i][j]
+                mx_2 = matrix2[b][i][j]
+                xor_res = xor([mx_1, mx_2])
+                tmp_list[i].append(xor_res)
+                j += 1
+            i += 1
+        matrix.append(tmp_list)
+        a += 1
+        b += 1
+
+    return matrix
+
 
 def creat_matrix(msg):
-    base = "0123456789abcdef"
+    base = "01"
     matrix_list = []
     i = 0
     end = 0
@@ -46,16 +84,16 @@ def creat_matrix(msg):
 
             while k < 4:
                 if i < msg_len:
-                    hx_char = convert_base(ord(msg[i]), base) 
-                    tmp_list[k].append(hx_char)
+                    bn_char = add_0_to_bn(convert_base(ord(msg[i]), base), 8) 
+                    tmp_list[k].append(bn_char)
 
                 elif end > 0:
-                    tmp_list[k].append(hx_char)
+                    tmp_list[k].append(bn_char)
 
                 else:
                     end = 16 - ((j+1) * k)
-                    hx_char = convert_base(end, base) 
-                    tmp_list[k].append(hx_char)
+                    bn_char = add_0_to_bn(convert_base(end, base), 8) 
+                    tmp_list[k].append(bn_char)
 
                 k += 1
                 i += 1
@@ -68,13 +106,26 @@ def creat_matrix(msg):
 msg_matrxi = creat_matrix("abdilah mol srdil")
 pass_matrxi = creat_matrix("123456")
 
+res = xor_matrix(msg_matrxi, pass_matrxi)
+
+print("\nfirst matrix:\n")
 for c in msg_matrxi:
     for n in c:
         print(n)
-    print("\n")
+    print("\n\n")
 
+print("-"*48)
+print("\nsecend matrix:\n")
 
 for c in pass_matrxi:
     for n in c:
         print(n)
-    print("\n")
+    print("\n\n")
+
+print("-"*48)
+print("\nXor result:\n")
+
+for c in res:
+    for n in c:
+        print(n)
+    print("\n\n")
