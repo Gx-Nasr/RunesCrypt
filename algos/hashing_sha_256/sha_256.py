@@ -57,7 +57,7 @@ def binary_blocks(password: str) -> list[str]:
 
 
 # Computes the SHA-256 hash of a password
-def sha_256(hash_string: str) -> str:
+def sha_256(hash_string: str, flag=0) -> str:
     blocks: list[str] = binary_blocks(hash_string)
 
     # Generate remaining message schedule words
@@ -66,16 +66,28 @@ def sha_256(hash_string: str) -> str:
         blocks.append(new_w)
 
     # Initial hash values, 256-bit
-    H: list[int] = [
-        int("6a09e667", 16),
-        int("bb67ae85", 16),
-        int("3c6ef372", 16),
-        int("a54ff53a", 16),
-        int("510e527f", 16),
-        int("9b05688c", 16),
-        int("1f83d9ab", 16),
-        int("5be0cd19", 16)
-    ]
+    if flag:
+        H: list[int] = [
+            int("5be0cd19", 16),
+            int("1f83d9ab", 16),
+            int("9b05688c", 16),
+            int("510e527f", 16),
+            int("a54ff53a", 16),
+            int("3c6ef372", 16),
+            int("bb67ae85", 16),
+            int("6a09e667", 16)
+        ]
+    else:
+        H: list[int] = [
+            int("6a09e667", 16),
+            int("bb67ae85", 16),
+            int("3c6ef372", 16),
+            int("a54ff53a", 16),
+            int("510e527f", 16),
+            int("9b05688c", 16),
+            int("1f83d9ab", 16),
+            int("5be0cd19", 16)
+        ]
 
     a, b, c, d, e, f, g, h = H
 

@@ -1,4 +1,4 @@
-from algos.hashing_sha_256.sha_256_utils import add_0_to_32, rotate_right, shift_right, convert_base
+from algos.hashing_sha_256.sha_256_utils import add_0_to_bn, rotate_right, shift_right, convert_base
 
 
 # Perform XOR operation on multiple binary strings
@@ -22,7 +22,7 @@ def xor(binary_list: list[str]) -> str:
 
 # Small sigma0 function used in SHA-256 message schedule
 def sigma0(x: str) -> str:
-    x = add_0_to_32(x)
+    x = add_0_to_bn(x, 32)
 
     # Right rotations and right shift
     r_7: str = rotate_right(x, 7)
@@ -35,7 +35,7 @@ def sigma0(x: str) -> str:
 
 # Small sigma1 function used in SHA-256 message schedule
 def sigma1(x: str) -> str:
-    x = add_0_to_32(x)
+    x = add_0_to_bn(x, 32)
 
     r_17: str = rotate_right(x, 17)
     r_19: str = rotate_right(x, 19)
@@ -46,7 +46,7 @@ def sigma1(x: str) -> str:
 
 # Big Sigma0 function used in SHA-256 compression
 def big_sigma0(x: str) -> str:
-    x = add_0_to_32(x)
+    x = add_0_to_bn(x, 32)
 
     r_2: str = rotate_right(x, 2)
     r_13: str = rotate_right(x, 13)
@@ -57,7 +57,7 @@ def big_sigma0(x: str) -> str:
 
 # Big Sigma1 function used in SHA-256 compression
 def big_sigma1(x: str) -> str:
-    x = add_0_to_32(x)
+    x = add_0_to_bn(x, 32)
 
     r_6: str = rotate_right(x, 6)
     r_11: str = rotate_right(x, 11)
@@ -70,9 +70,9 @@ def big_sigma1(x: str) -> str:
 # Chooses bits from y or z depending on x
 def ch(x: int, y: int, z: int) -> str:
     # Convert numbers to 32-bit binary strings
-    x = add_0_to_32(convert_base(x, "01"))
-    y = add_0_to_32(convert_base(y, "01"))
-    z = add_0_to_32(convert_base(z, "01"))
+    x = add_0_to_bn(convert_base(x, "01"), 32)
+    y = add_0_to_bn(convert_base(y, "01"), 32)
+    z = add_0_to_bn(convert_base(z, "01"), 32)
 
     i: int = 0
     choice: str = ""
@@ -94,9 +94,9 @@ def ch(x: int, y: int, z: int) -> str:
 # Returns the majority bit among x, y, and z
 def maj(x: int, y: int, z: int) -> str:
     # Convert numbers to 32-bit binary strings
-    x = add_0_to_32(convert_base(x, "01"))
-    y = add_0_to_32(convert_base(y, "01"))
-    z = add_0_to_32(convert_base(z, "01"))
+    x = add_0_to_bn(convert_base(x, "01"), 32)
+    y = add_0_to_bn(convert_base(y, "01"), 32)
+    z = add_0_to_bn(convert_base(z, "01"), 32)
 
     choice: list[str] = []
     x_len: int = len(x)

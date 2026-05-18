@@ -1,12 +1,11 @@
 # Pads a binary string with leading zeros until it reaches 32 bits
-def add_0_to_32(number: str) -> str:
-    b_len: int = len(number)
+def add_0_to_bn(number: str, add_0) -> str:
+    b_len: int = add_0 - len(number)
+    if b_len <= 0:
+        return number
+    zeros = "0" * b_len
 
-    while b_len < 32:
-        number = "0" + number
-        b_len += 1
-
-    return number
+    return zeros + number
 
 
 # Converts a decimal number to a custom base representation
@@ -49,6 +48,6 @@ def w_generater(blocks: list[str], i: int) -> str:
     w_4: int = int(sigma1(blocks[i-2]), 2)
 
     total: int = (w_1 + w_2 + w_3 + w_4) % (2**32)
-    binary_result: str = add_0_to_32(convert_base(total, "01"))
+    binary_result: str = add_0_to_bn(convert_base(total, "01"), 32)
 
     return binary_result
