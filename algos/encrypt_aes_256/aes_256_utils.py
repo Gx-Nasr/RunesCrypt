@@ -1,6 +1,10 @@
-def SubBytes(state_hex):
-    if len(state_hex) == 1:
-        state_hex = '0' + state_hex
+def shift_row(W, n):
+    return W[n:] + W[:n]
+
+
+def SubBytes(hex):
+    if len(hex) == 1:
+        hex = '0' + hex
     LookupTable = [
         ["63", "7C", "77", "7B", "F2", "6B", "6F", "C5", "30", "01", "67", "2B", "FE", "D7", "AB", "76"],
         ["CA", "82", "C9", "7D", "FA", "59", "47", "F0", "AD", "D4", "A2", "AF", "9C", "A4", "72", "C0"],
@@ -19,8 +23,8 @@ def SubBytes(state_hex):
         ["E1", "F8", "98", "11", "69", "D9", "8E", "94", "9B", "1E", "87", "E9", "CE", "55", "28", "DF"],
         ["8C", "A1", "89", "0D", "BF", "E6", "42", "68", "41", "99", "2D", "0F", "B0", "54", "BB", "16"]
     ]
-    row = int(state_hex[0], 16)
-    column = int(state_hex[1], 16)
+    row = int(hex[0], 16)
+    column = int(hex[1], 16)
 
     return LookupTable[row][column]
 
@@ -32,6 +36,7 @@ def add_0_to_bn(number: str, add_0) -> str:
     zeros = "0" * b_len
 
     return zeros + number
+
 
 def xor(binary_list: list[str]) -> str:
     result: list[str] = []
@@ -66,3 +71,21 @@ def convert_base(number: int, base: str, from_base=0) -> str:
         number = number // len_base
     
     return result
+
+
+def W_xor(W1, W2):
+    W = []
+    for i in range(4):
+        W.append(xor([W1[i], W2[i]]))
+
+    return W
+
+
+def SubWord(W):
+    new_w = []
+    base = "0123456789abcdef"
+    for byte in W:
+        tmp_w = add_0_to_bn(convert_base(SubBytes(convert_base(byte, base, 2)), '01', 16), 8)
+        new_w.append(tmp_w)
+
+    return new_w
