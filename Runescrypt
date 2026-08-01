@@ -1,5 +1,5 @@
+
 #!/bin/bash
 
 python3 -m UI
 
-find . -type d -name "__pycache__" -exec rm -rf {} +
