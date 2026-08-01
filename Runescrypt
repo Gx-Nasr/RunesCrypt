@@ -1,4 +1,3 @@
 #!/bin/bash
 
-uv run python3 -m UI
-
+uv run python -m UI

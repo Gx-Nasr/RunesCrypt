@@ -71,41 +71,17 @@ RunesCrypt includes the following capabilities:
 
 The following screenshots showcase the interface and the user experience of the application.
 
-### Login Screen
+<div align="center">
+  <img src="readme_imgs/login_img.png" alt="Login screen" width="260" />
+  <img src="readme_imgs/creat_img.png" alt="Account creation screen" width="260" />
+  <img src="readme_imgs/main_img.png" alt="Dashboard view" width="260" />
+</div>
 
-![Login page](readme_imgs/login_img.png)
-
-A clean authentication screen where users unlock their vault using their master password.
-
-### Account Creation
-
-![Create account screen](readme_imgs/creat_img.png)
-
-The onboarding experience for setting up a new account and master password.
-
-### Main Dashboard
-
-![Main dashboard](readme_imgs/main_img.png)
-
-The main vault view with a modern dashboard layout and encrypted credential overview.
-
-### Password Management View
-
-![Password management view](readme_imgs/main_with_passwrods.png)
-
-This view highlights how stored credentials appear within the vault after decryption.
-
-### Add Password Modal
-
-![Add password modal](readme_imgs/add_password.png)
-
-A focused modal used to add new platform credentials to the vault.
-
-### Empty Vault State
-
-![Empty vault state](readme_imgs/empty_add_password.png)
-
-The empty state displayed when no credentials have been stored yet.
+<div align="center" style="margin-top: 12px;">
+  <img src="readme_imgs/main_with_passwrods.png" alt="Vault with saved passwords" width="260" />
+  <img src="readme_imgs/add_password.png" alt="Add password modal" width="260" />
+  <img src="readme_imgs/empty_add_password.png" alt="Empty vault state" width="260" />
+</div>
 
 ---
 
@@ -357,31 +333,34 @@ Credentials remain encrypted in the vault while the login password is hashed bef
 
 ## Installation
 
-### Requirements
+This project uses uv for dependency management and environment setup.
 
-- Python 3.10+
-- PyQt5
-
-### Clone the repository
+### 1. Clone the repository
 
 ```bash
 git clone https://github.com/your-username/RunesCrypt.git
 cd RunesCrypt
 ```
 
-### Install dependencies
+### 2. Sync dependencies with uv
 
 ```bash
-pip install PyQt5
+uv sync
 ```
 
-### Run the application
+This installs the required packages from the project configuration automatically.
+
+### 3. Run the application
 
 ```bash
-python -m UI
+./Runescrypt
 ```
 
-If you are using a virtual environment, activate it first and then run the same command.
+If you prefer to run it manually inside the uv environment, use:
+
+```bash
+uv run python -m UI
+```
 
 ---
 
