@@ -1,6 +1,6 @@
-from aes_256_utils import *
-from key_expansion import creat_round_key
-from encryption_process_utils import AddRoundKey, MixColumns, shift_states, SubStates
+from .aes_256_utils import *
+from .key_expansion import creat_round_key
+from .encryption_process_utils import AddRoundKey, MixColumns, shift_states, SubStates
 
 def creat_matrix(msg):
     base = "01"
@@ -51,7 +51,7 @@ def encryption_process(states, round_keys):
     AddRoundKey(states, round_keys[14])
 
 
-def aes_256(data: str, key: str):
+def aes_256(data: str, key: str) -> str:
     states = creat_matrix(data)
     key = creat_matrix(key)
     key = creat_round_key(key)
@@ -69,5 +69,3 @@ def aes_256(data: str, key: str):
     res = res[:-1]
 
     return res
-
-print(aes_256("ana gadi nmchi ntsakher lyouy o machi l bar7 hahah", "12345678998745632102365897456321"))

@@ -1,6 +1,6 @@
-from decrypt_aes_256_utils import *
-from gmul import gmul9, gmul11, gmul13, gmul14
-from key_expansion import creat_round_key
+from .decrypt_aes_256_utils import *
+from .gmul import gmul9, gmul11, gmul13, gmul14
+from .key_expansion import creat_round_key
 
 def RevSubBytes(hex):
     if len(hex) == 1:
@@ -83,40 +83,6 @@ def RevMixColumns(states):
             state[2][col] = c
             state[3][col] = d
 
-def creat_matrix(msg):
-    base = "01"
-    matrix_list = []
-    i = 0
-    end = 0
-    msg_len = len(msg)
-    while i < msg_len:
-        j = 0
-        tmp_list = [[], [], [], []]
-
-        while j < 4:
-            k = 0
-
-            while k < 4:
-                if i < msg_len:
-                    bn_char = add_0_to_bn(convert_base(ord(msg[i]), base), 8) 
-                    tmp_list[k].append(bn_char)
-
-                elif end > 0:
-                    tmp_list[k].append(bn_char)
-
-                else:
-                    end = 16 - ((j+1) * k)
-                    bn_char = add_0_to_bn(convert_base(end, base), 8) 
-                    tmp_list[k].append(bn_char)
-
-                k += 1
-                i += 1
-
-            j += 1
-        matrix_list.append(tmp_list)
-
-    return matrix_list
-
 def decrypting_process(states, round_keys):
     AddRoundKey(states, round_keys[14])
     for i in range(13, 0, -1):
@@ -129,7 +95,7 @@ def decrypting_process(states, round_keys):
     RevSubStates(states)
     AddRoundKey(states, round_keys[0])
 
-def aes_256(data: str, key: str):
+def decrypt_aes_256(data: str, key: str):
     data = data.split("-")
     states = creat_rev_matrix(data)
     key = creat_matrix(key)

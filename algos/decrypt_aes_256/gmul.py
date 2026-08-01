@@ -1,4 +1,4 @@
-from decrypt_aes_256_utils import xor
+from .decrypt_aes_256_utils import xor
 
 
 def gmul2(byte):

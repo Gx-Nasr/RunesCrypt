@@ -1,4 +1,4 @@
-from decrypt_aes_256_utils import *
+from .decrypt_aes_256_utils import *
 
 def SubBytes(hex):
     if len(hex) == 1:

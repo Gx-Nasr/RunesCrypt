@@ -1,4 +1,4 @@
-from aes_256_utils import *
+from .aes_256_utils import *
 
 def g(W: list, for_xor: str):
     W = W.copy()

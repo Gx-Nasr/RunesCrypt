@@ -1,4 +1,4 @@
-from aes_256_utils import *
+from .aes_256_utils import *
 
 def SubStates(states):
     for state in states:
