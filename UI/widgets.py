@@ -295,7 +295,7 @@ class Field(QWidget):
 
         self.lbl = QLabel(label.upper(), self)
         self.label_color = th.lerp(th.TEXT, th.MUTED, 0.25)
-        self.lbl.setStyleSheet(f"color: {self.label_color.name()};")
+        self.lbl.setStyleSheet(f"color: {self.label_color.name()}; background-color: transparent;")
         self.lbl.setFont(th.font(9, "bold"))
         if not label:
             self.lbl.hide()
@@ -305,7 +305,7 @@ class Field(QWidget):
         v.addWidget(self.box)
 
         self.hint = QLabel("", self)
-        self.hint.setStyleSheet(f"color: {th.DANGER.name()};")
+        self.hint.setStyleSheet(f"color: {th.DANGER.name()}; background-color: transparent;")
         self.hint.setFont(th.font(11))
         self.hint.setVisible(False)
         v.addWidget(self.hint)
@@ -401,11 +401,11 @@ class _FieldBox(QWidget):
         if obj is self.entry and ev.type() == QEvent.FocusIn:
             fx.tween(lambda v: (setattr(self, "_t", v), setattr(self.owner, "_focused", v), self.update()),
                      0.0, 1.0, 170)
-            self.owner.lbl.setStyleSheet(f"color: {th.ACCENT_L.name()};")
+            self.owner.lbl.setStyleSheet(f"color: {th.ACCENT_L.name()}; background-color: transparent;")
         elif obj is self.entry and ev.type() == QEvent.FocusOut:
             fx.tween(lambda v: (setattr(self, "_t", v), setattr(self.owner, "_focused", v), self.update()),
                      1.0, 0.0, 220)
-            self.owner.lbl.setStyleSheet(f"color: {self.owner.label_color.name()};")
+            self.owner.lbl.setStyleSheet(f"color: {self.owner.label_color.name()}; background-color: transparent;")
         elif obj is self.entry and ev.type() == QEvent.KeyPress and ev.key() in (Qt.Key_Return, Qt.Key_Enter):
             if self.owner._on_return:
                 self.owner._on_return()
@@ -620,14 +620,14 @@ class EmptyState(QWidget):
 
         t = QLabel(title, self)
         t.setFont(th.font(18, "heavy"))
-        t.setStyleSheet(f"color: {th.TEXT.name()};")
+        t.setStyleSheet(f"color: {th.TEXT.name()}; background-color: transparent;")
         t.setAlignment(Qt.AlignCenter)
         lay.addWidget(t)
 
         if subtitle:
             s = QLabel(subtitle, self)
             s.setFont(th.font(13))
-            s.setStyleSheet(f"color: {th.MUTED.name()};")
+            s.setStyleSheet(f"color: {th.MUTED.name()}; background-color: transparent;")
             s.setAlignment(Qt.AlignCenter)
             lay.addWidget(s)
 
@@ -684,13 +684,13 @@ class EntryCard(QWidget):
         mid.setSpacing(2)
         self.lbl_platform = QLabel(self.platform, self)
         self.lbl_platform.setFont(th.font(15, "bold"))
-        self.lbl_platform.setStyleSheet(f"color: {th.TEXT.name()};")
+        self.lbl_platform.setStyleSheet(f"color: {th.TEXT.name()}; background-color: transparent;")
         self.lbl_email = QLabel(self.email, self)
         self.lbl_email.setFont(th.font(12))
-        self.lbl_email.setStyleSheet(f"color: {th.MUTED.name()};")
+        self.lbl_email.setStyleSheet(f"color: {th.MUTED.name()}; background-color: transparent;")
         self.lbl_pw = QLabel("\u2022" * min(len(self.password), 22), self)
         self.lbl_pw.setFont(th.mono(13))
-        self.lbl_pw.setStyleSheet(f"color: {th.FAINT.name()};")
+        self.lbl_pw.setStyleSheet(f"color: {th.FAINT.name()}; background-color: transparent;")
         mid.addWidget(self.lbl_platform)
         mid.addWidget(self.lbl_email)
         mid.addWidget(self.lbl_pw)
@@ -719,7 +719,7 @@ class EntryCard(QWidget):
         self._revealed = not self._revealed
         self.lbl_pw.setText(self.password if self._revealed else "\u2022" * min(len(self.password), 22))
         self.lbl_pw.setStyleSheet(
-            f"color: {th.TEXT.name() if self._revealed else th.FAINT.name()};")
+            f"color: {th.TEXT.name() if self._revealed else th.FAINT.name()}; background-color: transparent;")
         self.lbl_pw.setFont(th.mono(13) if self._revealed else th.font(13))
         self._btn_eye.icon = "eye_off" if self._revealed else "eye"
         self._btn_eye.update()
@@ -860,7 +860,7 @@ class Toast(QWidget):
 
         self.lbl = QLabel(message, self)
         self.lbl.setFont(th.font(13))
-        self.lbl.setStyleSheet(f"color: {th.TEXT.name()};")
+        self.lbl.setStyleSheet(f"color: {th.TEXT.name()}; background-color: transparent;")
         h.addWidget(self.lbl)
 
     def animate_in(self):

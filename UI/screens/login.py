@@ -18,7 +18,7 @@ class LoginScreen(AuthScreen):
 
         lay.addStretch(1)
         lay.addWidget(Brand(self.card, 58), 0, Qt.AlignHCenter)
-        lay.addSpacing(16)
+        lay.addSpacing(10)
 
         t = QLabel("Welcome back", self.card)
         t.setFont(th.font(26, "heavy"))
@@ -37,25 +37,21 @@ class LoginScreen(AuthScreen):
                 """)
         s.setAlignment(Qt.AlignCenter)
         lay.addWidget(s)
-        lay.addSpacing(26)
+        lay.addSpacing(20)
 
         self.f_login = Field(self.card, "Login", placeholder="Your username",
                              on_return=lambda: self.f_password.focus())
         lay.addWidget(self.f_login)
-
+        lay.addSpacing(20)
         self.f_password = Field(self.card, "Password", placeholder="\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022",
                                 password=True, on_return=self._submit)
         lay.addWidget(self.f_password)
-        lay.addSpacing(6)
+        lay.addSpacing(60)
 
         self.btn_login = Button(self.card, "Unlock vault", self._submit,
-                                variant="primary", height=52, radius=15, icon="lock", font_size=15)
+                                variant="primary", height=75, radius=15, icon="lock", font_size=15)
         lay.addWidget(self.btn_login)
         lay.addSpacing(14)
-
-        self.link = LinkButton(self.card, "Don\u2019t have an account? Create one",
-                               self._go_create)
-        lay.addWidget(self.link, 0, Qt.AlignHCenter)
 
         lay.addStretch(1)
 

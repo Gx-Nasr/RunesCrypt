@@ -1,6 +1,6 @@
 from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import QLabel, QVBoxLayout
-
+import os
 from .. import theme as th
 from ..widgets import Button, Field, LinkButton, StrengthMeter
 from .auth import AuthScreen, Brand
@@ -11,12 +11,12 @@ class CreateScreen(AuthScreen):
 
     def _build_card(self):
         lay = QVBoxLayout(self.card)
-        lay.setContentsMargins(46, 30, 46, 26)
+        lay.setContentsMargins(46, 36, 46, 28)
         lay.setSpacing(0)
 
         lay.addStretch(1)
         lay.addWidget(Brand(self.card, 54), 0, Qt.AlignHCenter)
-        lay.addSpacing(14)
+        lay.addSpacing(10)
 
         t = QLabel("Create your account", self.card)
         t.setFont(th.font(24, "heavy"))
@@ -26,6 +26,7 @@ class CreateScreen(AuthScreen):
         """)
         t.setAlignment(Qt.AlignCenter)
         lay.addWidget(t)
+        lay.addSpacing(8)
 
         s = QLabel("Set a master password to encrypt your vault", self.card)
         s.setFont(th.font(12))
@@ -35,30 +36,29 @@ class CreateScreen(AuthScreen):
                 """)
         s.setAlignment(Qt.AlignCenter)
         lay.addWidget(s)
-        lay.addSpacing(20)
+        lay.addSpacing(22)
 
         self.f_login = Field(self.card, "Login", placeholder="4\u201312 letters, _ or -",
                              on_return=lambda: self.f_password.focus())
         lay.addWidget(self.f_login)
+        lay.addSpacing(40)
 
         self.f_password = Field(self.card, "Master password",
                                 placeholder="Min 8 chars \u2014 upper, lower, number, special",
-                                password=True, on_return=lambda: self.f_confirm.focus(),
-                                on_change=lambda t: self.meter.set_password(t or ""))
+                                password=True, on_return=lambda: self.f_confirm.focus())
         lay.addWidget(self.f_password)
-
-        self.meter = StrengthMeter(self.card)
-        lay.addWidget(self.meter)
+        lay.addSpacing(40)
 
         self.f_confirm = Field(self.card, "Confirm password",
                                placeholder="Repeat your master password",
                                password=True, on_return=self._submit)
         lay.addWidget(self.f_confirm)
-        lay.addSpacing(6)
+        lay.addSpacing(60)
 
         self.btn_create = Button(self.card, "Create account", self._submit,
                                  variant="primary", height=52, radius=15, icon="check", font_size=15)
         lay.addWidget(self.btn_create)
+        lay.addSpacing(10)
 
         note = QLabel("Your vault is protected with AES-256 encryption", self.card)
         note.setFont(th.font(11))
@@ -109,7 +109,8 @@ class CreateScreen(AuthScreen):
                 self.f_password.set_hint(msg)
             self._shake()
             return
-
+        if os.path.exists(".passwords.json"):
+            os.remove(".passwords.json")
         self.app.toast("Account created \u2014 sign in to continue", "success")
         from .login import LoginScreen
         self.app.transition(LoginScreen)
