@@ -1,5 +1,5 @@
 #!/bin/bash
 
-python3 -m interface
+python3 -m interface_v3
 
 find . -type d -name "__pycache__" -exec rm -rf {} +

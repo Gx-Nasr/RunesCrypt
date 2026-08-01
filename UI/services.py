@@ -54,10 +54,6 @@ def authenticate(login: str, password: str) -> str:
     return master_key(password)
 
 
-# ---------------------------------------------------------------------------
-# Vault (password manager data)
-# ---------------------------------------------------------------------------
-
 def load_vault() -> list:
     if not VAULT_FILE.exists():
         return []
