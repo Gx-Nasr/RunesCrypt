@@ -2,6 +2,7 @@ import sys
 
 from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import QApplication
+from PyQt5.QtGui import QIcon
 
 from . import services
 from .app import App
@@ -14,6 +15,7 @@ def run():
     app.setApplicationName("RunesCrypt")
     app.setStyle("Fusion")
     win = App(services)
+    win.setWindowIcon(QIcon("img/icon.png"))
     win.show()
     sys.exit(app.exec_())
 
